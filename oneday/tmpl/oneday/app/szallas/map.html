@@ -1,0 +1,28 @@
+
+    
+ <h2><!--cim--></h2>
+  
+<div id="test" style="min-height:400px;" class="gmap3"></div>
+<script>
+  $(function () {
+    $('#test')
+      .gmap3({
+        address: "<!--cim-->",
+        zoom:15,
+        mapTypeId : google.maps.MapTypeId.ROADMAP
+      })
+       .marker(function (map) {
+        return {
+          position: map.getCenter(),
+          icon: 'http://maps.google.com/mapfiles/marker_green.png'
+        };
+      }) 
+        .on('click', function (marker, event) {
+          marker.setIcon('http://maps.google.com/mapfiles/marker_orange.png');
+          setTimeout(function () {
+            marker.setIcon('http://maps.google.com/mapfiles/marker_green.png');
+          }, 200);
+        })
+    ;
+  });
+</script>

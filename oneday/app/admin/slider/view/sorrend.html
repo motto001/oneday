@@ -1,0 +1,45 @@
+
+
+<div class="form-group col-sm-6 col-sm-offset-3">
+<div id="uzeno" style="color:white;font-size:16px">A sorrend változtatáshoz, kattints bal gombbal a mgefelelő elemre, majd a gombot lenyomva tartva, húzd a megfelelő helyre!</div>
+</div>
+<div class="form-group col-sm-4 col-sm-offset-3">
+<ul id="image-list1" class="sortable-list">
+ <!--sorrend-->
+</ul>
+</div>
+<input id="sorrend" type="hidden" name="sorrend" value="">  
+
+<!--<ul id="image-list2" class="sortable-list">
+  <li id="1">1</li>
+  <li id="2">2</li>
+  <li id="3">3</li>
+</ul>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+   <script src="js/index.js"></script>
+   <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+   
+   -->
+ 
+<script>
+$('.sortable-list').sortable({
+  connectWith: '.sortable-list',
+  update: function(event, ui) {
+    var changedList = this.id;
+    var order = $(this).sortable('toArray');
+    var positions = order.join(';');
+    $('#sorrend').val(order);
+    $('#uzeno').html('<span style="color:red;">A megváltozott sorrendet, </br> a sorment gombra kattintva lehet véglegesíteni!</span>');
+//alert(order);
+ /*   console.log({
+      id: changedList,
+      positions: positions
+    });*/
+  }
+});
+
+
+</script>
+
+    
+    

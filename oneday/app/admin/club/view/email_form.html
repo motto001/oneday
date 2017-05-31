@@ -1,0 +1,120 @@
+  <script>
+var emailid=0;
+var nonstop=true;
+function mailkuld(){
+	
+var cim= $('#cim').val();
+var subject=$('#subject').val();	
+var body=$('#body').val();
+var emailszam=$('#emailszam').val();
+
+	$.ajax({
+	    type: "POST",
+	    url: "http://email.helyiakciok.hu/index.php",
+	    type: "POST",	
+	    datatype: 'json',
+		data:{ 'db':'oneday','cim': cim ,'subject':subject,'body':body,'total':emailszam,'task':'csoportos'}, 
+	    success: function(data)
+	    {
+	    	data = JSON.parse(data);
+	    	emailid=data.id;
+	    	csoportoskuld();
+	    	$('#vezerlogombok').css('display','block');
+	    	//adatfrissit(data.id);
+	    	//alert(data.id);  
+	 	
+	    }
+	})	;
+	
+}
+
+
+function stop(){
+nonstop=false;
+	$.ajax({
+	    type: "POST",
+	  url: "http://email.helyiakciok.hu/index.php",
+	    type: "POST",	
+	    datatype: 'json',
+		data:{ 'id': emailid ,'db':'oneday','task':'stop'}, 
+	    success: function(data)
+	    {
+ 	    	
+	    }
+	})	;
+}
+
+
+function csoportoskuld(){
+nonstop=true;
+adatfrissit()  	; 
+	$.ajax({
+	    type: "POST",
+	      url: "http://email.helyiakciok.hu/index.php",
+	    type: "POST",	
+	    datatype: 'json',
+		data:{ 'id': emailid ,'db':'oneday','task':'csoportoskuld'} ,
+	  	success: function(data)
+	    { }
+	})	;
+	 	
+	    	  
+}
+function adatfrissit()
+{
+setTimeout(function(){
+	$.ajax({
+	    type: "POST",
+	     url: "http://email.helyiakciok.hu/index.php",
+	    type: "POST",	
+	    datatype: 'json',
+		data:{ 'id': emailid,'db':'oneday','task':'statusz'}, 
+	    success: function(data)
+	    {
+	   // alert(data);
+	 	data = JSON.parse(data);
+	 	
+	 	$('#kesz').html(data.sended);		    	
+	    }
+	})	;
+if(nonstop){adatfrissit();}}, 1000);
+	
+}
+
+
+  </script>
+  <div class="form-group col-sm-8 col-sm-offset-2">  
+  <h4 style="color:white;">Email küldés</h4>
+            
+            <div id="emailstatusz" style="padding:10px;color:white;" >
+            <span  style="">Összes: </span><span id="osszes" dat-inner="emailszam" style="">80</span></br>
+             <span  style="">Elküldött: </span><span id="kesz" style="">0</span></br>
+             <div id="vezerlogombok" style="display: none;">
+               <span onclick="stop()" class="btn btn-primary btn-xn">Stop</span>
+              <span onclick="csoportoskuld();" class="btn btn-primary btn-xn">Folytat</span>
+            </div>
+            </div >
+            <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="" role="form">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <input type="text" dat-value="cim" class="form-control" id="cim" required="required" placeholder="Címzettek" name="cim">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text"  class="form-control" id="subject" required="required" placeholder="Üzenet tárgya" name="subject">
+                        </div>
+                       <input type="hidden" id="emailszam" dat-value="emailszam" name="emailszam" >
+                    </div>
+                    <div class="col-sm-12">
+                        <textarea name="body" id="body" required="required" class="form-control" rows="8" placeholder="Üzenet"></textarea>
+                    </br>
+                    <div class="form-group">
+                            <span onclick="mailkuld()" class="btn btn-primary btn-lg">Üzenet Küldés</span>
+                             <a href="index.php?app=admin\club" class="btn btn-primary btn-lg">Mégse</a>
+                        </div>
+                    </div>
+                     
+                </div>
+            </form>
+ </div>            

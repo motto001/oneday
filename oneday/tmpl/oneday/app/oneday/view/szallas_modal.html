@@ -1,0 +1,78 @@
+
+<div class="row" >
+  <center><h3 dat-inner="nev"></h3></center>
+</div> 
+<style>
+.flexrow{
+display: flex;
+flex-flow:row wrap;
+align-items: stretch;
+justify-content: space-around;
+margin: 0 auto;
+
+}
+.imgdiv4{
+
+	background: #e8e8e8;
+	margin:5px;
+	max-height:250px;
+	max-width:250px;
+	flex: 1 1 100px; /* flex-grow | flex-shrink | flex-basis */
+}
+.szovegbox{
+
+background: #e8e8e8;
+padding:5px;margin:5px;
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+/*border: 1px solid #3d4b8c;*/
+}
+    @media screen and (min-width: 768px) {
+        .modal-dialog {
+          width: 800px; /* New width for default modal */
+        }
+        .modal-sm {
+          width: 350px; /* New width for small modal */
+        }
+    }
+  /*  @media screen and (min-width: 992px) {
+        .modal-lg {
+          width: 950px; /
+        }*/
+    }
+</style>
+
+<div class="row flexrow"  >
+
+        <img  dat-src="kep1" class="imgdiv4" src="" alt="" />     
+   
+        <img  dat-src="kep2" class="imgdiv4" src="" alt="" />     
+
+</div> 
+<div class="row" >
+<div class="col-sm-5 col-sm-offset-3">
+  	<a  onclick="modal_betolt('index.php?app=szallas&task=galeria&id=<!--getid-->','modalbase2');" class="btn btn-primary mmm"  data-toggle="modal" data-target="#myModal2">
+ 			 Galéria
+	</a>
+   	
+		<a class="btn btn-primary mmm"  onclick="taskbeallit('szallasemail');" data-toggle="modal" data-target="#contactModal" >
+ 			Üzenet
+	</a>
+</div> 	
+</div>
+<div class="row szovegbox" >
+<div  style="margin-bottom:10px;" class=" col-sm-12 ">
+  <center>  <h3  dat-inner="fullcim"> </h3> </center>
+   </div> 
+
+  <div dat-inner="egyeb" style="margin-bottom:10px;" class=" col-sm-12 ">
+       
+   </div> 
+  <center> <!--iconlist--></center>
+</div> 
+<div class="row szovegbox" style="background: #3d4b8c;color:#ebe8d6;" >
+  <div dat-inner="bemutat" class="col-sm-12 ">
+       
+   </div> 
+</div> 

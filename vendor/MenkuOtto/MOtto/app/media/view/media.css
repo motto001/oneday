@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+.thumb_kontener{
+border:solid 1px #302815;
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+border-radius: 8px;
+float:left;
+margin:3px;
+background-color:white;
+width:80px;
+height:125px;
+overflow:hidden;
+}
+.thumb_nev{
+padding-left:5px;
+}
+.ikon_button{
+ background-color:red;
+ color:white;
+}
+.listathumb{
+cursor:pointer;
+}
+
+
+.ikondiv{
+float:right;
+}
+
+#progress-wrp {
+    border: 1px solid #0099CC;
+    padding: 1px;
+    position: relative;
+    border-radius: 3px;
+    margin: 10px;
+    text-align: left;
+    background: #fff;
+    box-shadow: inset 1px 3px 6px rgba(0, 0, 0, 0.12);
+}
+#progress-wrp .progress-bar{
+    height: 20px;
+    border-radius: 3px;
+    background-color: #f39ac7;
+    width: 0;
+    box-shadow: inset 1px 1px 10px rgba(0, 0, 0, 0.11);
+}
+#progress-wrp .status{
+    top:3px;
+    left:50%;
+    position:absolute;
+    display:inline-block;
+    color: #000000;   
+}
+

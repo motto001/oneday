@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+  table {
+
+        padding: 25px;
+        background-color:whitesmoke;
+        margin-left:5%;
+        margin-top:3%;
+        min-width:70% ;
+
+        color: darkslategray;
+    }
+    .trfejlec{
+        background-color: royalblue;
+        color: white; 
+    }
+    th {
+        height: 50px;
+    }
+    table, th, td { padding: 5px;
+        border: 1px solid black;max-width:30%;
+    }

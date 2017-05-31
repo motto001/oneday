@@ -1,0 +1,79 @@
+ (motto.php) class MOtto
+alap app meghívásasa: linken keresztül ketős keresztel: ?app=#app  //pl.:#omni
+Az app satatikus osztályának res függvényét hívjuk meg: 
+Akkor használjuk ha nem szabbvány appot kivánunk futtatni
+$namespace=$_GET['app'] $classnev: a $namespace utolsó eleme
+'$html= \app\\'.$namespace.'\\'..'_S::Res();'
+
+szabványos alap app hívása: linken keresztül : ?app=app 
+a Motto osztály az app ostály statikusán  kersztül hívja meg.
+$html= App_s::Res( $app);  $app=$_GET['app'] //pl.: ?app=omni vagy ?app=admin\omni
+
+(app.php)class App_Base
+->appinit($namespace,$parT=[])
+ellenőrzi az ADT osztály meglétét a kovetkező névterekben:
+$namespace_full='\app\\'.$namespace.'\\'.$classnev.'_ADT'
+$namespace_full='\app\\'.$namespace.'\ADT'
+$namespace=$_GET['app'] $classnev: a $namespace utolsó eleme
+ha nincs ADT hibát ír a GOB::$hibaT-be és üres tömbbel folytatja.
+
+ meghivja a getADT($namespace_full) ami:
+ ha van ADT és van ::initADT() függvénye lefuttatja, beállítja az ADT-t
+ ha van ADT::getADT($namespace) függvénye azon kerestül kéri be az ADT-t
+ ha nincs akkor self(AppBase)::getADT($namespace)-el ;
+ Ő ha külön van szedve az ADT összemásolja. Az ::$ELL(ha létezik) tombbe megfelelő elemeihez másolja a ::$RGX(ha létezik) tömb 
+ megfelelő elemeit. majd a  ::$ELL tomböt másolja a ::$ADT-be.Utána  a ::$TRT éa ::$TSK elemeket is (ha léteznek) 
+ bemásolja a ::$ADT-be és visszatér vele  ::$ELL,::$TRT,::$TSK,::$RGX nem kötelezőek létre őket vagy bármelyiküket közvetlenül az AADT-be 
+ hozni. Csak a könnyebb áttekinthetőség miatt vannak.
+ 
+ foytatódik az ->appinit($namespace,$parT=[])
+ $this->ADT=array_merge( $this->ADT,$parT)
+ Ha vannak beolvassa az alapparamétereket(GOB::$paramT[$this->ADT['appID'])
+ ha az appIDuniq=true létrehozza az egyedi azonosítót (megnézi szerepel -e az GOB::$appIDT[]-ben
+ . Ha ige sorszámoza.) ha megvan az egyedi azonosító beírja a GOB::$appIDT[]-be és az ADT-be
+ Ha van betölti az egyedi azonosítóhoz tartozó paramétereket a GOB::$paramT[$this->ADT['appID']-ből
+ 
+ 
+ ->App()
+ lefuttatja az ADT['funcT'] függvényeit ha nincs akkor ADT['TRT'] kulcsaiból képez egyet. Ha az sincs, nem csinál semmit
+ 
+class App_s
+Res($namespace,$parT=[]) 
+beolvassa az adott app TRT tömbjét get_TRT($namespace) meghívásával. 
+Generál egy App osztályt ami a TRT tömbÖt(lehet üres is) használja(use) és az App_Base az őse
+majd visszatér az ostálypéldány view-ével return $app->ADT['view']; 
+
+Alap app esetén Aa MOtto ezt bemásolja a HTML-be lefutattja az ini esetleg lang  függvényeket 
+és kiirja.
+
+trt\task\view:
+a megadott html file-t a tmpl/'app'  gyökerében ha nincs akkor az app/'app'/view(pl.:app/omni/view)
+gyökerében lévő viewinit.php ViewInit::Res() tölti be.(pl.:tmpl\omni\ViewInit::Res($html)) 
+nem érdemes kísérletezni a közvetlen file betöltéssel mert nem csak  a dinamikus elérési utat kell ''kitalálni hanem a CSS,js fileok  elérését is át kell írni.
+ez végzi el a ViewInit::Res(); névtér alapján hívjuk és feltölti a head tömböt.
+a view fil-t és a view névteret ha van az ADT['TSK'][$task]['viewF/view_namespace'] ből veszi
+ ha nincs akkor az  ből. ha itt sincs 'view_namespace' akkor az ADT['namespace'] lesz az
+  ha nincs view_file akkor ADT['TSK'][$task]['view']-el ha nincs ADT['view']-el tér vissza
+
+A css-ben lévő képek (pl.:background) forrását érdemes index.php?imgout=src vel  megadni 
+így a tmpl más könyvtár szerkezetben is használható
+
+mod betöltés:
+'ChangeApp'=>'trt\Dom_ChangeApp' Az app alaptraitjei között kell meghívni. nem jó MOtto-ban vagy az AppBase-ben
+ mert akkor csak a legfelső szint appjait hívja meg. a meghívott app-ok appjait már nem
+ az appokat a html-ben lévő <!--:namespace--> vagy <!--:namespace|appID--> alapján hívja meg
+ az App_S::Res()sgítségével.
+  <!--:namespace|appID--> esetén beírja az ADT-be appID-et
+ a GOB::paramT-ben és az ADT[paramT]-ben lévő paramétrek betöltését is az App_S::Res() végzi 
+Ellenőrzések 
+A szükséges traiteket Az ADT['Ell_TRT']-kell írni
+ pl.: 'Ell_TRT'=>['Marvan'=>'\trt\ell\DB_Marvan', 'Match'=>'\trt\ell\Ell_Match']
+hagyományosan a kulcs a futtatandó függvény neve de nincs jelentősége. nem associativ tömbel is működik.
+
+Az ell tömb taskonként tartalmazza az ellenőrizendő változók neveit.
+
+
+
+ 
+ 
+ 

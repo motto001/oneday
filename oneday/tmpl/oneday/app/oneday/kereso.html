@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+<script src="vendor\MenkuOtto\MOtto\vendor\jquery\jquery-1.9.1.min.js"></script> 
+   <!--  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="ROOT/app/szallas/gmap3.js">
+    </script>  <link type="text/css" rel="stylesheet" href="ROOT/app/szallas/mapstyle.css" />
+    -->
+   <link href="vendor\MenkuOtto\MOtto\vendor\bootstrap\bootstrap337\css\bootstrap.min.css" rel="stylesheet"> 
+  <script src="vendor\MenkuOtto\MOtto\vendor\bootstrap\bootstrap337\js\bootstrap.min.js"></script>
+<script src="oneday/tmpl/oneday/app/oneday/js/jssor.slider-21.1.6.min.js" type="text/javascript"></script>
+<!--|head|-->
+    <script> $( document ).ready(function(){
+	$('.btn').tooltip({ html: true});
+	$('#fromnev').val(nev);
+	$('#setfrom').val(email);
+	$('body').on('hidden.bs.modal', '.modal', function () {
+	    $(this).removeData('bs.modal');
+	});
+	
+	});
+    
+    var szallaslink='';
+    var emailtask='contact';
+    function modalbezar(){
+    	$('#modalclose3').click();
+    }
+    function taskbeallit(task){
+    	emailtask=task;
+    	$('#body').val('');
+    	$('#emailstatusz').html('');	
+    }
+   
+    function modal_betolt(link,loadID='modalbase') //
+    {	szallaslink	= link;
+    	emailtask='szallasemail';
+    	$('#'+loadID).load(link);	
+    	
+    }
+    function mailkuld(){
+    	
+    	var fromnev= $('#fromnev').val();
+    	var setfrom=$('#setfrom').val();	
+    	var body=$('#body').val();
+
+    		$.ajax({
+    		    type: "POST",
+    		    url: "index.php",
+    		    type: "POST",	
+    		    datatype: 'json',
+    			data:{ 'setfrom': setfrom ,'fromnev':fromnev,'body':body,'szallaslink':szallaslink,'task':emailtask}, 
+    		    success: function(data){
+    		    	if(data=='ok'){$('#emailstatusz').html('Üzenetét továbbítottuk!');setTimeout(function(){ $('#modalclose3').click(); }, 3000);	}else{	
+    		    		$('#emailstatusz').html(data);	
+    		    	}
+      	
+    		    }
+    		})	;
+    		
+    	}
+
+
+    </script>
+<script type="text/javascript">
+        jssor_1_slider_init = function() {
+            
+            var jssor_1_options = {
+              
+              $AutoPlay: true,
+
+              $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$
+              },
+              $ThumbnailNavigatorOptions: {
+                $Class: $JssorThumbnailNavigator$,
+                $Cols: 15,
+                $SpacingX: 3,
+                $SpacingY: 3,
+                $Align: 455
+              }
+            };
+            
+            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+            
+            /*responsive code begin*/
+            /*you can remove responsive code if you don't want the slider scales while window resizing*/
+            function ScaleSlider() {
+                var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+                if (refSize) {
+                    refSize = Math.min(refSize, 980);
+                    jssor_1_slider.$ScaleWidth(refSize);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+            ScaleSlider();
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+            $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+            /*responsive code end*/
+        };
+        
+    </script>
+    <style>
+        /* jssor slider arrow navigator skin 07 css */
+        /*
+        .jssora07l                  (normal)
+        .jssora07r                  (normal)
+        .jssora07l:hover            (normal mouseover)
+        .jssora07r:hover            (normal mouseover)
+        .jssora07l.jssora07ldn      (mousedown)
+        .jssora07r.jssora07rdn      (mousedown)
+        .jssora07l.jssora07lds      (disabled)
+        .jssora07r.jssora07rds      (disabled)
+        */
+        .jssora07l, .jssora07r {
+            display: block;
+            position: absolute;
+            /* size of arrow element */
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            background: url('oneday/tmpl/oneday/app/oneday/img/a17.png') no-repeat;
+            overflow: hidden;
+        }
+        .jssora07l { background-position: -5px -35px; }
+        .jssora07r { background-position: -65px -35px; }
+        .jssora07l:hover { background-position: -125px -35px; }
+        .jssora07r:hover { background-position: -185px -35px; }
+        .jssora07l.jssora07ldn { background-position: -245px -35px; }
+        .jssora07r.jssora07rdn { background-position: -305px -35px; }
+        .jssora07l.jssora07lds { background-position: -5px -35px; opacity: .3; pointer-events: none; }
+        .jssora07r.jssora07rds { background-position: -65px -35px; opacity: .3; pointer-events: none; }
+        
+        /* jssor slider thumbnail navigator skin 04 css */
+        /*
+        .jssort04 .p            (normal)
+        .jssort04 .p:hover      (normal mouseover)
+        .jssort04 .pav          (active)
+        .jssort04 .pav:hover    (active mouseover)
+        .jssort04 .pdn          (mousedown)
+        */
+        
+        .jssort04 .p {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 62px;
+            height: 32px;
+        }
+        
+        .jssort04 .t {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .jssort04 .w, .jssort04 .pav:hover .w {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            border: #0099FF 1px solid;
+            box-sizing: content-box;
+        }
+        
+        .jssort04 .pdn .w, .jssort04 .pav .w {
+            border-style: dashed;
+        }
+        
+        .jssort04 .c {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 62px;
+            height: 32px;
+            background-color: #000;
+            filter: alpha(opacity=45);
+            opacity: .45;
+            transition: opacity .6s;
+            -moz-transition: opacity .6s;
+            -webkit-transition: opacity .6s;
+            -o-transition: opacity .6s;
+        }
+        
+        .jssort04 .p:hover .c, .jssort04 .pav .c {
+            filter: alpha(opacity=0);
+            opacity: 0;
+        }
+        
+        .jssort04 .p:hover .c {
+            transition: none;
+            -moz-transition: none;
+            -webkit-transition: none;
+            -o-transition: none;
+        }
+        
+        * html .jssort04 .w {
+            width /**/: 62px;
+            height /**/: 32px;
+        }
+      .ketborder{
+      border-style: solid;
+    border-width: 0px 4px 0px 4px;
+      }  
+      .blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
+
+    </style>
+
+
+</head>
+<body style="padding:0px; margin:0px; background: url('oneday/res/images/background10.jpg') no-repeat center center fixed;background-size: cover;font-family:helvetica, arial, verdana, sans-serif">
+
+
+<style>
+    .ketborder{
+     border-volor: black;
+      border-style: solid;
+    border-width: 0px 4px 0px 4px;
+      } 
+.alulkerekit{
+-webkit-border-bottom-right-radius: 20px;
+-moz-border-radius-bottomright: 20px;
+border-bottom-right-radius: 20px;
+-webkit-border-bottom-left-radius: 20px;
+-moz-border-radius-bottomleft: 20px;
+border-bottom-left-radius: 20px;
+min-height:800px;
+}
+.flexrow{
+  display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+ 
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+
+/*
+display:  inline-flex;
+flex-flow:row wrap;
+justify-content: space-around;
+align-items: stretch;
+
+margin: 0 auto;*/
+
+}
+.flexhirdet{
+ display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        flex-basis:49%;
+	/*background: #e8e8e8;
+	margin:5px;
+	max-height:250px;
+	max-width:250px;*/
+	/*flex: 1 1 45%; /* flex-grow | flex-shrink | flex-basis */
+}
+
+
+</style>
+
+<div class="row " >
+	
+	<div class="col-sm-9 col-sm-offset-2 ketborder" style="background-color:#fff;">
+	  <img src="oneday/tmpl/oneday/app/oneday/img/fejlec.jpg" style="width:100%;height:180px;" class="img-responsive" >
+  <form action="index.php?app=oneday" method="post"> 
+   
+   <input type="text" id="kereso" name="kereso" style="position:absolute;top:150px;left:20px;background: none; border: none;height:25px;width:23%;font-size:18px;color:black;" > 
+   
+    <div style="position:absolute;top:140px;left:26%;">	
+   	 	
+ 	  <!--fomenu-->
+ 	   	 <a href="index.php?"  class="btn btn-primary "> <span style="font-size:18px;" class="glyphicon glyphicon-home"></span></a>
+  
+	 </div>
+ 	</form>
+ 	
+ 	
+ 	
+ </div> 
+</div>
+
+
+
+<div class="row  ">
+	
+	<div class="col-sm-9 col-sm-offset-2 ketborder alulkerekit " style="background-color:#fff;">
+ <!--kereso-->
+  <!--content-->
+ 	
+ </div> 
+</div>
+  
+
+
+ <div id="myModal"  class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="modalclose" type="button" class="close" data-dismiss="modal">&times;</button>
+      <!--   <h4 class="modal-title">Select a File to Upload</h4> -->
+      </div>
+      <div id="modalbase" class="modal-body">
+ 
+      </div>
+      <div  class="modal-footer">  
+      
+    
+      </div>
+    </div>
+  </div>
+</div> 
+
+ <div id="myModal2"  class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="modalclose" type="button" class="close" data-dismiss="modal">&times;</button>
+      <!--   <h4 class="modal-title">Select a File to Upload</h4> -->
+      </div>
+      <div id="modalbase2" class="modal-body">
+ 
+      </div>
+      <div  class="modal-footer">  
+      
+    
+      </div>
+    </div>
+  </div>
+</div> 
+ <div id="contactModal"  class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="modalclose3" type="button" class="close" data-dismiss="modal">&times;</button>
+      <!--   <h4 class="modal-title">Select a File to Upload</h4> -->
+      </div>
+      <div id="modalbase3" class="modal-body">
+
+    <div class="row" style="padding:10px;background-color:#330000;">    
+            <h4 style="color:white;">Kapcsolat Felvétel</h4>
+            
+            <div id="emailstatusz" style="padding:10px;color:white;" ></div>
+            <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="" role="form">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <input type="text" dat-value="name" class="form-control" id="fromnev" required="required" placeholder="Név" name="fromnev">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" dat-value="email" class="form-control" id="setfrom" required="required" placeholder="Email cím" name="setfrom">
+                        </div>
+                       
+                    </div>
+                    <div class="col-sm-12">
+                        <textarea name="body" id="body" required="required" class="form-control" rows="8" placeholder="Üzenet"></textarea>
+                    </br>
+                    <div class="form-group">
+                            <span onclick="mailkuld()" class="btn btn-primary btn-lg">Üzenet Küldés</span>
+                             <span onclick="modalbezar();" class="btn btn-primary btn-lg">Mégse</span>
+                        </div>
+                    </div>
+                     
+                </div>
+            </form>
+    </div>
+
+      </div>
+      <div  class="modal-footer">  
+      
+    
+      </div>
+    </div>
+  </div>
+</div>
+    
+</body>
+</html>

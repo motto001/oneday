@@ -1,0 +1,54 @@
+
+<style>
+h2{
+color:white;
+padding:20px;
+}
+.err_div{
+color:red;
+font-size:18px;
+padding:10px;
+}
+</style>
+ <center><h2 lt="lapcim">Nyitolap admin</h2></center>
+ <div class="row"><div class="col-sm-8 col-sm-offset-2" >
+ <div class="err_div" lt="err" ></div>
+<div class="alert_div"lt="alert" ></div>
+<div class="info_div"  lt="info" ></div>
+</div> </div> 
+
+
+<div class="row">
+
+  <div class="form-group col-sm-8 col-sm-offset-2">
+	<a id="kepcsere" onclick="modal_betolt('index.php?app=media','modalbase');" class="btn btn-primary"  data-toggle="modal" data-target="#myModal">
+ 			 Kép beszúrás helyi fájlból
+	</a>
+ 	    <div id="editor1" dat-inner="szoveg" >
+			
+		</div>
+ 
+   </div>
+	
+	  	 <div   class="form-group col-sm-7 col-sm-offset-3" >
+	  	<input type="hidden" name="id"  value="1">  
+	   <input type="hidden" name="szoveg" id="hiddenszoveg" value="">  
+	 <!--  	<button type="submit" name="task" value="savenew" lt-inner="new" class="btn btn-primary ">Ment és új</button>  -->
+	    <button type="submit" onclick="kiir()" name="task" value="save" lt-inner="save" class="btn btn-primary ">Ment</button>
+        <a  href="index.php?app=admin\slider"  lt-inner="cancel"  class="btn btn-primary">Mégsem</a>	    
+	    </div>
+</div>
+
+<script>
+function kiir(){
+	var value = CKEDITOR.instances['editor1'].getData();
+	$('#hiddenszoveg').val(value);
+	// alert(value);
+}
+function beszur(path){
+	$("#modalclose").click();
+	CKEDITOR.instances.editor1.insertHtml( '<img src="'+path+'" style="float:left; height:200px; margin-left:15px; margin-right:15px; width:150px" />' );
+}
+	initSample('editor1');
+
+</script>

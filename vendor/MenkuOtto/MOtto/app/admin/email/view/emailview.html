@@ -1,0 +1,133 @@
+  <script>
+var emailid=0;
+var nonstop=true;
+function mailkuld(){
+	
+var cim= $('#cim').val();
+var subject=$('#subject').val();	
+var body=$('#body').val();
+var emailszam=$('#emailszam').val();
+
+	$.ajax({
+	    type: "POST",
+	    url: "http://localhost/motto/email/index.php",
+	    type: "POST",	
+	    datatype: 'json',
+		data:{ 'db':'oneday','cim': cim ,'subject':subject,'body':body,'total':emailszam,'task':'csoportos'}, 
+	    success: function(data)
+	    {
+	    	data = JSON.parse(data);
+	    	emailid=data.id;
+	    	csoportoskuld();
+	    	$('#vezerlogombok').css('display','block');
+	    	//adatfrissit(data.id);
+	    	//alert(data.id);  
+	 	
+	    }
+	})	;
+	
+}
+
+
+function stop(){
+nonstop=false;
+	$.ajax({
+	    type: "POST",
+	    url: "http://localhost/motto/email/index.php",
+	    type: "POST",	
+	    datatype: 'json',
+		data:{ 'id': emailid ,'db':'oneday','task':'stop'}, 
+	    success: function(data)
+	    {
+ 	    	
+	    }
+	})	;
+}
+
+
+function csoportoskuld(){
+nonstop=true;
+adatfrissit()  	; 
+	$.ajax({
+	    type: "POST",
+	    url: "http://localhost/motto/email/index.php",
+	    type: "POST",	
+	    datatype: 'json',
+		data:{ 'id': emailid ,'db':'oneday','task':'csoportoskuld'} ,
+	  	success: function(data)
+	    { }
+	})	;
+	 	
+	    	  
+}
+function adatfrissit()
+{
+setTimeout(function(){
+	$.ajax({
+	    type: "POST",
+	    url: "http://localhost/motto/email/index.php",
+	    type: "POST",	
+	    datatype: 'json',
+		data:{ 'id': emailid,'db':'oneday','task':'statusz'}, 
+	    success: function(data)
+	    {
+	   // alert(data);
+	 	data = JSON.parse(data);
+	 	
+	 	$('#kesz').html(data.sended);		    	
+	    }
+	})	;
+if(nonstop){adatfrissit();}}, 1000);
+	
+}
+
+
+  </script>
+  <div style="background-color:#404F5F;padding:10px;">  
+  <h4 style="color:white;">Email nézet</h4>
+            
+            <div id="emailstatusz" style="padding:10px;color:white;" >
+            <span  style="">Összes: </span><span id="osszes" dat-inner="total" style=""></span></br>
+             <span  style="">Elküldött: </span><span id="kesz" dat-inner="sended" style=""></span></br>
+             
+             <div id="vezerlogombok" dat-inner="gomb">
+        
+            </div>
+            </div >
+                <div class="row">
+                    <div class="col-sm-12">
+                     <div class="col-sm-6">
+                    <label>Feladó címe</label>
+                            <div type="text" dat-inner="setfrom" class="form-control" id="setfrom" >
+                    		</div>
+                    </div>
+                       <div class="col-sm-6">
+                    <label>Feladó név</label>
+                            <div type="text" dat-inner="fromname" class="form-control" id="fromname" >
+                    		</div>
+                    </div>
+                        <div class="form-group">
+                        <label>Címzettek</label>
+                            <div type="text" style="max-height:100px;overflow:hidden;" dat-inner="cim" class="form-control" id="cim" required="required" placeholder="Címzettek" name="cim">
+                    		</div>
+                        </div>
+
+                        <div class="form-group">
+                         <label>Tárgy</label>
+                            <div type="text" dat-inner="subject" class="form-control" id="subject" >
+                       	    </div>
+                        </div>
+                       <input type="hidden" id="emailszam" dat-value="emailszam" name="emailszam" >
+                    </div>
+                    <div class="col-sm-12">
+                      <label>Üzenet</label>
+                        <div name="body" id="body" dat-inner="body" class="form-control" style="min-height:200px;" ></div>
+                    </br>
+                    <div class="form-group">
+                         
+                        </div>
+                    </div>
+                     
+                </div>
+            </form>
+ </div>            

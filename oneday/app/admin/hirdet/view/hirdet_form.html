@@ -1,0 +1,68 @@
+<!-- Button trigger modal -->
+<script type="text/javascript">
+
+function beszur(path) 
+{
+	$("#modalclose").click();
+	var rootpath = path.replace("oneday", "ROOT");
+	$('#kep').attr('src',path);
+	$('#kepinput').val(path);
+}
+	
+
+</script>
+
+<style>
+h2{
+color:white;
+padding:20px;
+}
+.err_div{
+color:red;
+font-size:18px;
+padding:10px;
+}
+</style>
+ <center><h2 lt="lapcim">Hirdetés admin</h2></center>
+ <div class="row"><div class="col-sm-8 col-sm-offset-2" >
+ <div class="err_div" lt="err" ></div>
+<div class="alert_div"lt="alert" ></div>
+<div class="info_div"  lt="info" ></div>
+</div> </div> 
+ 
+<form    method="post"  >
+<div class="row">
+
+  <div class="form-group col-sm-8 col-sm-offset-2">
+   <div class="form-group col-sm-4 ">
+   	<img id="kep" src="index.php?imgout=MOtto/res/ico/noimage.jpg" dat-src="media" style="width:100%;height:200px;">
+	<input type="text" id="kepinput" name="media" dat-value="media" class="form-control"  value="">
+   	<a id="kepcsere" onclick="modal_betolt('index.php?app=media','modalbase');" class="btn btn-primary mmm"  data-toggle="modal" data-target="#myModal">
+ 			 Képcsere
+	</a>
+   </div>
+   <div class="form-group col-sm-8 ">	
+ 	 <label style="color:white;">Cím</label>
+ 		<input type="text" dat-value="cim"   name="cim" class="form-control" required >
+ 	<label style="color:white;">Cím látszik: </label> 
+			<input type="radio" dat-checked="pub" name="cimview"  checked value="0" >Nem
+			<input type="radio" dat-checked="pub" name="cimview"  value="1" >Igen</br></br>
+	<label style="color:white;">Szöveg</label>
+ 		<textarea  dat-inner="szoveg" rows="5" name="szoveg" class="form-control" required ></textarea>
+		 <label style="color:white;">Aktiválás: </label> 
+			<input type="radio" dat-checked="pub" name="pub"  checked value="0" >Aktiv
+			<input type="radio" dat-checked="pub" name="pub"  value="1" >Inaktív
+ </div>	
+ </div> 
+ </div>
+<div class="row">   
+     	
+	  	 <div   class="form-group col-sm-7 col-sm-offset-3" >
+	  	<input type="hidden" name="id" dat-value="id" value="">  
+	  	<input type="hidden" name="kat" value="hirdetes"> 
+	  	<button type="submit" name="task" value="savenew" lt-inner="new" class="btn btn-primary ">Ment és új</button> 
+	    <button type="submit" name="task" value="save" lt-inner="save" class="btn btn-primary ">Ment</button>
+        <a  href="index.php?app=admin\hirdet"  lt-inner="cancel"  class="btn btn-primary">Mégsem</a>	    
+	    </div>
+</div>
+</form>

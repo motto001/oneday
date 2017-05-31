@@ -1,0 +1,105 @@
+ <form id="szallasform" action="index.php?app=admin\szallas"  method="post"  >
+
+
+
+<div class="row" >
+
+<script>
+var jelolt_varosT=[];
+var varosT=[];
+var jelolt_szolgT=[];
+var t='';
+
+        function jelol(id,varosnev){
+		//alert($("#"+id).attr('class'));
+//	var varosnev=$("#"+id).val();	
+        	if($("#"+id).attr('class')=='btn btn-primary')
+        	{
+        		$("#"+id).attr('class', 'btn btn-danger');
+        		jelolt_varosT.push(id);
+        		varosT.push(varosnev);
+        	}	
+        	else{
+        		$("#"+id).attr('class', 'btn btn-primary');
+        		var index = jelolt_varosT.indexOf(id);
+        		var index2 = varosT.indexOf(varosnev);
+        		if(index2 != -1) {
+        			varosT.splice(index, 1);
+        		}
+        		if(index != -1) {
+        			jelolt_varosT.splice(index, 1);
+        		}
+        	};
+        	varos_frissit();	
+    }
+        function szolgjelol(id){
+    		//alert($("#"+id).attr('class'));
+    		
+            	if($("#"+id).attr('class')=='btn btn-primary')
+            	{
+            		$("#"+id).attr('class', 'btn btn-danger');
+            		jelolt_szolgT.push(id);
+            	}	
+            	else{
+            		$("#"+id).attr('class', 'btn btn-primary');
+            		var index = jelolt_szolgT.indexOf(id);
+            		
+            		if(index != -1) {
+            			jelolt_szolgT.splice(index, 1);
+            		}
+            	};
+            	//varos_frissit();	
+        }  
+        
+        function varos_frissit(){
+        	var varos='';var varos2='';
+        	$(".szallasthumb").each(function(index,item){
+        	  //  parseInt($(item).data('index'))
+        	  varos=$(item).data('varos');
+        	 // if(varos!='Hajdúszoboszló')
+        	//  {  varos2=varos2+varos;}
+        	   
+        	  // jQuery.inArray( varos, varosT )
+        	    if(varosT.indexOf(varos) != -1){
+        	    	$(item ).css( "display", "initial" );
+        	    	$(item ).css( "display", "visible" );
+        	    	// $( "#uzen" ).append(varos);
+        	    	// $('#uzen').html(varos);
+        	    }
+        	    else{
+        	    	$(item ).css( "display", "initial" );
+        	    	 $(item ).css( "display", "none" );
+        	    	
+        	    	// $( "#uzen" ).append(varos);
+        	    }
+        	});
+        	// $( "#uzen" ).append(JSON.stringify(varosT, null, "  "));
+        	 //$('#uzen').html(varos2);
+        	/*t='';
+        	for (index = 0; index < jelolt_varosT.length; ++index) {
+        		t=t+','+jelolt_varosT[index];
+        	}*/
+    	
+    	//alert(t);
+    	
+        }   
+        
+        </script>	
+		<center><h3>Város szerinti keresés</h3></center>
+	<div style="padding-left:20px;">	<!--varoslist-->
+	
+		</br></br>
+	<!--szallaslist--></div>
+
+</div>
+
+</div>
+
+<div class="row">   
+     <div id="hiddentask"> </div>	
+	  	 <div   class="form-group col-sm-8 col-sm-offset-3" >
+	  	<input type="hidden" id="hiddenid" name="id" dat-value="id" value="szallasid">  
+	   
+	    </div>
+</div>
+</form>

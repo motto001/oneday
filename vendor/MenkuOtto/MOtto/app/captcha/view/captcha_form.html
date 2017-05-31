@@ -1,0 +1,14 @@
+<script>
+
+function ujcpt(){
+	var i=Math.floor((Math.random() * 100000) + 1); 
+	$('#captcha_image').attr('src','vendor/MenkuOtto/MOtto/app/captcha/image.php?kk='+i);
+}
+
+</script>
+<div class="captchadiv">
+<img width="150" height="40" id="captcha_image" src="vendor/MenkuOtto/MOtto/app/captcha/image.php" >
+<img onclick="ujcpt() ;" width="35" height="35" src="index.php?imgout=*MOtto/app/captcha/images/refresh2.png">
+ <div class="form-group">
+            <input type="text" class="form-control" lt-placeholder="captcha_input" name="captcha" placeholder="Kérjük írja be a fenti kódot " required="required" >
+ </div> </div>

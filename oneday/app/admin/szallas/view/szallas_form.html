@@ -1,0 +1,220 @@
+
+<style>
+h2{
+color:white;
+padding:20px;
+}
+.err_div{
+color:red;
+font-size:18px;
+padding:10px;
+}
+</style>
+
+ <center><h2 lt="lapcim">Szálloda admin</h2></center>
+ <div class="row"><div class="col-sm-8 col-sm-offset-2" >
+ <div class="err_div" lt="err" ></div>
+<div class="alert_div"lt="alert" ></div>
+<div class="info_div"  lt="info" ></div>
+</div> </div> 
+ 
+<form id="szallasform" action="index.php?app=admin\szallas"  method="post"  >
+<div class="row">
+
+  <div class="form-group col-sm-8 col-sm-offset-2">
+ 	 <label style="color:white;">Név</label>
+ 		<input type="text" dat-value="nev" id="nev" name="nev" class="form-control" required="required" >
+ 	</div>
+</div>
+<div class="row"> 	
+ 	<div class="form-group col-sm-3 col-sm-offset-3">
+	<img id="kep1" src="index.php?imgout=MOtto/res/ico/noimage.jpg" dat-src="kep1" style="width:100%;height:200px;">
+	<input type="text" id="kep1input" name="kep1" dat-value="kep1" class="form-control"  value="">
+
+	</div>
+	
+	<div class="form-group col-sm-3">
+	<img id="kep2" src="index.php?imgout=MOtto/res/ico/noimage.jpg" dat-src="kep2" style="width:100%;height:200px;">
+	<input type="text" id="kep2input" name="kep2" dat-value="kep2" class="form-control"  value="">
+
+	</div>
+</div>	
+<div class="row">
+	
+		<script>
+	function kepcsere(cserekep,path,rootdir)
+	{
+		//alert(kepcsereid)	;
+	$('#'+cserekep).attr('src',rootdir+path);
+	$('#'+cserekep+'input').val('ROOT'+path);
+	}
+	function imagedel(kep) 
+	{
+		var szallodaid=$('#hiddenid').val();
+		 if(confirm("Az Ok gombra kattintva, a kiválasztott elem véglegesen törlődni fog a galériából! A fájl megmarad.")){
+			 $.ajax({
+			        type: "POST",
+			        url: "index.php?app=admin|szallas",
+					
+			    data:{'kep': kep, 'szallodaid': szallodaid ,'task':'imagedel'}, 
+			        success: function(data){
+			      //alert(data);
+			        	$('#imagelist').html(data);
+			        }
+			    })	;
+		      
+		    }
+		    else{
+		        return false;
+		    }
+	  
+	}
+	
+	
+	function beszur(kep) 
+	{
+		//$('#myModal').hide();
+		//$('.modal-backdrop').hide();
+		$("#modalclose").click();
+		var szallodaid=$('#hiddenid').val();
+		var ujratolt='nem';
+		//alert(szallodaid);
+	 $.ajax({
+		        type: "POST",
+		        url: "index.php?app=admin|szallas",
+			  // data : formData,
+			   //contentType: false,
+			  //  cache: false,
+			 // processData:false,
+			  //  dataType : 'HTML',				
+		    data:{'kep': kep, 'szallodaid': szallodaid ,'task':'saveimage'}, 
+		        success: function(data){
+		        	//alert(data);
+		        	if(szallodaid=='0')
+		        	{	//alert('---------');
+		        		//data2 = JSON.parse(data);
+		        		szallodaid=data.id;
+		        		//alert('jkhj'+szallodaid);
+		        		$('#hiddenid').val(szallodaid);
+		        		ujratolt='igen';
+		        		//$.post("index.php?app=admin|szallas",{'id': szallodaid ,'task':'edit'});
+		        		
+		       
+		        		 $.ajax({
+		        	         type: "POST",
+		        	         url: "index.php?app=admin|szallas",
+		        	         data: {'id': szallodaid ,'task':'edit2'},
+		        	         success: function(data2){  
+		        	        	//alert(data2); 
+		        	        	$('body').html(data2);   
+		        	         }
+		        	      }); 
+		        		
+		        		
+		        		
+		        		//$('#hiddentask').html('<input type="hidden"  name="task" value="edit"> ');
+		        		//alert(szallodaid);
+		        		//$("#szallasform").submit();
+		        		//window.location.replace("index.php?app=admin|szallas&task=edit&id="+szallodaid);
+		        	}
+		        	else
+		        	{
+		        		$('#imagelist').html(data);
+		        	}
+		        	
+		        	//$('#imagelist').html(data);
+		        	
+		        	
+		        }
+		    })	;
+	// if(ujratolt=='igen')
+	// {
+		// alert('--');
+		/* $.ajax({
+	         type: "POST",
+	         url: "index.php?app=admin|szallas",
+	         data: {'id': szallodaid ,'task':'edit'},
+	         success: function(){    
+	             location.reload();   
+	         }
+	      }); */
+		 
+	// }
+	
+	 
+	 
+		    
+		  /*  $.get('http://localhost/motto/index.php?app=admin|club' , function(data, status){
+				  //alert(data)  ;
+				  $('#imagelist').html(data);
+			  });*/
+	}
+	
+	</script>
+	<div class="form-group col-sm-8 col-sm-offset-2">
+	<div id="imagelist">
+	<!--imagelist-->
+	</div>
+	<a id="kepcsere" onclick="modal_betolt('index.php?app=media','modalbase');" class="btn btn-primary mmm"  data-toggle="modal" data-target="#myModal">
+ 			 Kép hozzáadás
+	</a>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group col-sm-8 col-sm-offset-2">
+	<label style="color:white;">Bemutatás</label> 
+		 <textarea rows="10" dat-inner="bemutat" name="bemutat" class="form-control" ></textarea>
+	<label style="color:white;">Ár,info</label> 
+		 <textarea rows="4" dat-inner="egyeb" name="egyeb" class="form-control" ></textarea>
+	</div>	
+	<div id="checklist" class="form-group col-sm-8 col-sm-offset-2">
+	<!--checklist-->
+	</div>
+
+</div>	
+<div class="row">	
+	<div class="form-group col-sm-4 col-sm-offset-2">
+	<label style="color:white;">Publikus Cím</label> 	
+		 <input type="text" dat-value="cim" name="cim" class="form-control"  >
+		<div class="form-group col-sm-4 ">
+	<label style="color:white;">Ország</label> 
+		 <input type="text"  name="orszag" dat-value="orszag" class="form-control"  value="HU">	 
+	</div>
+	<div class="form-group col-sm-8 ">
+	<label style="color:white;">Város</label> 
+		 <input type="text"  name="varos" dat-value="varos" class="form-control" required="required"  value="">	 
+	</div>	 
+	<label style="color:white;">Email</label> 
+		 <input type="text"  name="hirdeto_email" dat-value="hirdeto_email" class="form-control"  value="">	 
+
+	</div>	
+	
+	<div class="form-group col-sm-4">
+	<label style="color:white;">Cégnév</label> 
+		 <input type="text"  name="hirdeto_cegnev" dat-value="hirdeto_cegnev" class="form-control"  value="">	 
+	<label style="color:white;">Kapcsolattartó</label> 
+		 <input type="text" name="hirdeto_nev" dat-value="hirdeto_nev" class="form-control" value="" >	 
+	<label style="color:white;">Számlázási cím</label> 
+		 <input type="text"  name="hirdeto_cim" dat-value="hirdeto_cim" class="form-control"  value="">	 
+	<label style="color:white;">Telefon</label> 
+		 <input type="text"  name="hirdeto_tel" dat-value="hirdeto_tel" class="form-control"  value="">	
+	</div>	
+ </div>		
+
+	<div class="form-group col-sm-8 col-sm-offset-2">
+	<label style="color:white;">Aktiválás: </label> 
+			<input type="radio" dat-checked="pub" name="pub"  checked value="0" >Aktiv
+			<input type="radio" dat-checked="pub" name="pub"  value="1" >Inaktív
+	</div>
+</div>
+
+<div class="row">   
+     <div id="hiddentask"> </div>	
+	  	 <div   class="form-group col-sm-8 col-sm-offset-3" >
+	  	<input type="hidden" id="hiddenid" name="id" dat-value="id" value="szallasid">  
+	  	<button type="submit" name="task" value="savenew" lt-inner="new" class="btn btn-primary ">Ment és új</button> 
+	    <button type="submit" name="task" value="save" lt-inner="save" class="btn btn-primary ">Ment</button>
+        <a  href="index.php?app=admin\szallas"  lt-inner="cancel"  class="btn btn-primary">Mégsem</a>	    
+	    </div>
+</div>
+</form>

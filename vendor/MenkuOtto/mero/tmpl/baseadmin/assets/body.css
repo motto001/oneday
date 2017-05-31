@@ -1,0 +1,45 @@
+.listakontener{
+border:solid 1px #302815;
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+border-radius: 8px;
+float:left;
+margin:3px;
+background-color:white;
+width:180px;
+height:260px;
+overflow:hidden;
+}
+.listaimg{
+
+width:150px;
+height:160px;
+}
+.lista_pubikon{
+width:24px;
+height:24px;
+}
+.thumbnev{
+padding-left:10px;
+}
+.ikon_button{
+ background-color:red;
+ color:white;
+}
+.listathumb{
+cursor:pointer;
+}
+
+.ikondiv{
+float:right;
+}
+
+
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
+h2{
+color:white;
+padding:20px;
+}

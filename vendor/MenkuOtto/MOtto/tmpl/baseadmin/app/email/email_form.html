@@ -1,0 +1,31 @@
+  <div class="col-sm-8">
+<div lt-inner="err" ></div>
+<div lt-inner="alert" ></div>
+<div lt-inner="info" ></div>   
+            
+                <form id="email-form" class="contact-form" name="emailform" method="post" action="" role="form">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            
+                            <div class="form-group">
+                                <input type="text" dat-value="CON_fromnev" name="fromnev" class="form-control" required="required" lt-placeholder="fromnev"  placeholder="Küldö neve">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" dat-value="CON_mailfrom" name="setfrom" class="form-control" required="required" lt-placeholder="setfrom" placeholder="Küldő Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="subject" class="form-control" required="required" lt-placeholder="subject" placeholder="Tárgy">
+                            </div>
+                            <div class="form-group">
+                             <button type="submit" name="task" value="mailkuld" class="btn btn-primary "><span lt-inner="send" >Küldés</span></button>
+           					 <button type="button" name="task" value="alap" lt="cancel" onclick=" submit() ;" class="btn btn-primary"><span lt-inner="cancel" >Mégsem</span></button>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                        
+                            <textarea name="body"  required="required" class="form-control" lt="message" rows="8" placeholder="Üzenet"></textarea>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div><!--/.col-sm-8-->

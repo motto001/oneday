@@ -1,0 +1,38 @@
+
+<style>
+h2{
+color:white;
+padding:20px;
+}
+.err_div{
+color:red;
+font-size:18px;
+padding:10px;
+}
+</style>
+ <center><h2 lt="lapcim">Jelszó változtatás</h2></center>
+ <div class="row"><div class="col-sm-8 col-sm-offset-2" >
+ <div class="err_div" lt="err" ><!--hiba--></div>
+<div class="alert_div"lt="alert" ></div>
+<div class="info_div"  lt="info" ></div>
+</div> </div> 
+ 
+<form  action="index.php?app=admin|club"  method="post"  >
+<div class="row">
+
+  <div class="form-group col-sm-6 col-sm-offset-2">
+ 	 <label style="color:white;">Régi jelszó</label>
+ 		<input type="password"   name="oldpassword" class="form-control" required="required" >
+	<label style="color:white;">Új jelszó</label>
+		 <input type="password"  name="password" class="form-control" required="required">
+	<label style="color:white;">Új jelszó mégegyszer</label>
+		 <input type="password"  name="password2" class="form-control" required="required">
+ 
+     	
+	  	 <div   class="form-group col-sm-7 col-sm-offset-3" >
+	  	<input type="hidden" name="id" dat-value="id" value="">   
+	    <button type="submit" name="task" value="jelszoment" lt-inner="save" class="btn btn-primary ">Ment</button>
+        <a  href="index.php?app=admin\club"  lt-inner="cancel"  class="btn btn-primary">Mégsem</a>	    
+	    </div>
+</div>
+</form>
